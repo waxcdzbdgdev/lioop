@@ -19,26 +19,26 @@ jobs:
       max-parallel: 20
       matrix:
         include:
-          - name: asakafhias-aesene12a
-          - name: asakafhias-besene12b
-          - name: asakafhias-cesene12c
-          - name: asakafhias-desene12d
-          - name: asakafhias-eesene12e
-          - name: asakafhias-fesene12f
-          - name: asakafhias-gesene12g
-          - name: asakafhias-hesene12h
-          - name: asakafhias-iesene12i
-          - name: asakafhias-jesene12j
-          - name: okakfhair-aaesene12k
-          - name: okakfhair-baesene12l
-          - name: okakfhair-caesene12m
-          - name: okakfhair-daesene12n
-          - name: okakfhair-eaesene12o
-          - name: okakfhair-faesene12p
-          - name: okakfhair-agesene12q
-          - name: okakfhair-haesene12r
-          - name: okakfhair-iaesene12s
-          - name: okakfhair-jaesene12t          
+          - name: asakafhias-aesene12awe
+          - name: asakafhias-besene12bwe
+          - name: asakafhias-cesene12cwe
+          - name: asakafhias-desene12dwe
+          - name: asakafhias-eesene12ewe
+          - name: asakafhias-fesene12fwe
+          - name: asakafhias-gesene12gwe
+          - name: asakafhias-hesene12hwe
+          - name: asakafhias-iesene12iwe
+          - name: asakafhias-jesene12jwe
+          - name: okakfhair-aaesene12kwe
+          - name: okakfhair-baesene12lwe
+          - name: okakfhair-caesene12mwe
+          - name: okakfhair-daesene12nwe
+          - name: okakfhair-eaesene12owe
+          - name: okakfhair-faesene12pwe
+          - name: okakfhair-agesene12qwe
+          - name: okakfhair-haesene12rwe
+          - name: okakfhair-iaesene12swe
+          - name: okakfhair-jaesene12twe          
     runs-on: ubuntu-latest
     timeout-minutes: 320
     steps:
