@@ -19,26 +19,26 @@ jobs:
       max-parallel: 20
       matrix:
         include:
-          - name: helliosan-ayonser1112a1
-          - name: helliosan-byonser1112b1
-          - name: helliosan-cyonser1112c1
-          - name: helliosan-dyonser1112d1
-          - name: helliosan-eyonser1112e1
-          - name: helliosan-fyonser1112f1
-          - name: helliosan-gyonser1112g1
-          - name: helliosan-hyonser1112h1
-          - name: helliosan-iyonser1112i1
-          - name: helliosan-jyonser1112j1
-          - name: helilop-kyonserer1112k1
-          - name: helilop-lyonserer1112l1
-          - name: helilop-myonserer1112m1
-          - name: helilop-nyonserer1112n1
-          - name: helilop-oyonserer1112o1
-          - name: helilop-pyonserer1112p1
-          - name: helilop-qyonserer1112q1
-          - name: helilop-ryonserer1112r1
-          - name: helilop-syonserer1112s1
-          - name: helilop-tyonserer1112t1
+          - name: helliosans-ayonser1112a1
+          - name: helliosans-byonser1112b1
+          - name: helliosans-cyonser1112c1
+          - name: helliosans-dyonser1112d1
+          - name: helliosans-eyonser1112e1
+          - name: helliosans-fyonser1112f1
+          - name: helliosans-gyonser1112g1
+          - name: helliosans-hyonser1112h1
+          - name: helliosans-iyonser1112i1
+          - name: helliosans-jyonser1112j1
+          - name: helilops-kyonserer1112k1
+          - name: helilops-lyonserer1112l1
+          - name: helilops-myonserer1112m1
+          - name: helilops-nyonserer1112n1
+          - name: helilops-oyonserer1112o1
+          - name: helilops-pyonserer1112p1
+          - name: helilops-qyonserer1112q1
+          - name: helilops-ryonserer1112r1
+          - name: helilops-syonserer1112s1
+          - name: helilops-tyonserer1112t1
     runs-on: ubuntu-latest
     timeout-minutes: 320
     steps:
@@ -67,10 +67,10 @@ jobs:
           else
             # Sebelum 3 siklus, aturan biasa
             if [ "$LOOP" -ge 9983 ]; then
-              echo "🔄 Awal loop, sleep pendek"
+              echo "🔄 hello"
               SLEEP=600
             else
-              echo "⏳ Loop lanjutan, sleep 1 jam"
+              echo "⏳ hello"
               SLEEP=3600
             fi
           fi
