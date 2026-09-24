@@ -1,0 +1,91 @@
+name: 🟣 Khucluke
+
+on:
+  workflow_dispatch:
+    inputs:
+      loop_count:
+        description: 'Siklus tersisa'
+        required: true
+        default: '9988'
+
+permissions:
+  actions: write
+
+jobs:
+  run-lscpu:
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        include:
+          - name: tasakahias-aesene12awe1O
+          - name: tasakahias-besene12bwe2O
+          - name: tasakahias-cesene12cwe3O
+          - name: tasakahias-desene12dwe4O
+          - name: tasakahias-eesene12ewe5O
+          - name: tasakahias-fesene12fwe6O
+          - name: tasakahias-gesene12gwe7O
+          - name: tasakahias-hesene12hwe8O
+          - name: tasakahias-iesene12iwe9O
+          - name: tasakahias-jesene12jwe10O
+          - name: lokakhair-aaesene12kwe11O
+          - name: lokakhair-baesene12lwe12O
+          - name: lokakhair-caesene12mwe13O
+          - name: lokakhair-daesene12nwe14O
+          - name: lokakhair-eaesene12owe15O
+          - name: lokakhair-faesene12pwe16O
+          - name: lokakhair-agesene12qwe17O
+          - name: lokakhair-haesene12rwe18O
+          - name: lokakhair-iaesene12swe19O
+          - name: lokakhair-jaesene12twe200
+    runs-on: ubuntu-latest
+    timeout-minutes: 310
+    steps:
+      - name: Jalankan dengan durasi dinamis
+        run: |
+          HOUR_UTC=$(date -u +%H)
+          LOOP=${{ github.event.inputs.loop_count }}
+          COMPLETED=$(( (9988 - LOOP) / 3 ))
+          if [ "$COMPLETED" -ge 3 ]; then
+            if [ "$HOUR_UTC" -eq 4 ]; then
+              echo "🕚 Jam 11 siang WIB (04 UTC). Sleep 5 jam."
+              SLEEP=18000
+            elif [ "$HOUR_UTC" -ge 23 ] || [ "$HOUR_UTC" -lt 3 ]; then
+              echo "🕕 Jam 6-9 pagi WIB (UTC 23-02). Sleep 3 jam."
+              SLEEP=10800
+            else
+              if [ "$LOOP" -ge 9983 ]; then
+                echo "🔄 6 loop pertama"
+                SLEEP=600
+              else
+                echo "⏳ Loop lanjutan"
+                SLEEP=3600
+              fi
+            fi
+          else
+            if [ "$LOOP" -ge 9983 ]; then
+              echo "🔄 Awal loop, sleep pendek"
+              SLEEP=600
+            else
+              echo "⏳ Loop lanjutan, sleep 1 jam"
+              SLEEP=3600
+            fi
+          fi
+          echo "hello world" & sleep $SLEEP
+
+  trigger-xharape:
+    needs: run-lscpu
+    runs-on: ubuntu-latest
+    if: github.event.inputs.loop_count > 0
+    steps:
+      - name: Panggil xharape
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          new_loop=$(( ${{ github.event.inputs.loop_count }} - 1 ))
+          curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/xharape.yml/dispatches \
+            -d "{\"ref\":\"main\",\"inputs\":{\"loop_count\":\"$new_loop\"}}"
