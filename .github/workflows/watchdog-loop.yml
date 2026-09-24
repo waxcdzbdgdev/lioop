@@ -1,4 +1,4 @@
-name: 🐕 Watchdog Loop
+name: 🐕 Bluebob
 
 on:
   workflow_dispatch:
@@ -6,20 +6,36 @@ on:
     - cron: '*/10 * * * *'   # setiap 10 menit
 
 permissions:
-  actions: write             # untuk dispatch workflow lain
-  contents: read             # opsional
+  actions: write
 
 jobs:
-  check-and-restart:
+  # Mode manual: langsung mulai loop dari pancung
+  manual-start:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
-      - name: Cek apakah ada workflow yang sedang berjalan
+      - name: Mulai loop dari pancung
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "🚀 Memanggil pancung.yml..."
+          curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/pancung.yml/dispatches \
+            -d '{"ref":"main","inputs":{"loop_count":"9988"}}'
+
+  # Mode schedule: cek dan restart jika loop mati
+  watchdog:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cek apakah loop masih berjalan
         id: check
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           REPO="${{ github.repository }}"
-
           check_in_progress() {
             WF_FILE=$1
             RUNS=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
@@ -27,8 +43,7 @@ jobs:
             TOTAL=$(echo "$RUNS" | jq '.total_count')
             [ "$TOTAL" -gt 0 ] && return 0 || return 1
           }
-
-          if check_in_progress "phanu.yml" || check_in_progress "khurap.yml" || check_in_progress "khirap.yml"; then
+          if check_in_progress "pancung.yml" || check_in_progress "khucluke.yml" || check_in_progress "xharape.yml"; then
             echo "✅ Loop masih berjalan."
             echo "alive=true" >> $GITHUB_OUTPUT
           else
@@ -36,15 +51,15 @@ jobs:
             echo "alive=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Restart loop via phanu
+      - name: Restart loop via pancung
         if: steps.check.outputs.alive == 'false'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "🚀 Memulai ulang phanu.yml..."
+          echo "🚀 Memulai ulang pancung.yml..."
           curl -X POST \
             -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${{ github.repository }}/actions/workflows/phanu.yml/dispatches \
-            -d '{"ref":"main","inputs":{"loop_count":"9999"}}'
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/pancung.yml/dispatches \
+            -d '{"ref":"main","inputs":{"loop_count":"9988"}}'
           echo "✅ Loop telah dihidupkan kembali."
