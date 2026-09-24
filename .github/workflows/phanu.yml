@@ -1,4 +1,4 @@
-name: 🟢 phanu
+name: 🟢 Pancung
 
 on:
   workflow_dispatch:
@@ -6,11 +6,7 @@ on:
       loop_count:
         description: 'Siklus tersisa'
         required: true
-        default: '9999'
-      next_phase:
-        description: 'Workflow selanjutnya (khirap atau khurap)'
-        required: true
-        default: 'khirap'
+        default: '9988'
 
 permissions:
   actions: write
@@ -20,22 +16,20 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - run: echo "hello world" & sleep 60
+      - run: echo "hello world" & sleep 80
 
-  line-next:
+  trigger-khucluke:
     needs: run-hello
     runs-on: ubuntu-latest
     if: github.event.inputs.loop_count > 0
     steps:
-      - name: Panggil workflow selanjutnya (${{ github.event.inputs.next_phase }})
+      - name: Panggil khucluke
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           new_loop=$(( ${{ github.event.inputs.loop_count }} - 1 ))
-          NEXT="${{ github.event.inputs.next_phase }}"
-          echo "🚀 Memanggil ${NEXT}.yml dengan loop_count=$new_loop"
           curl -X POST \
             -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/${NEXT}.yml/dispatches" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/khucluke.yml/dispatches \
             -d "{\"ref\":\"main\",\"inputs\":{\"loop_count\":\"$new_loop\"}}"
