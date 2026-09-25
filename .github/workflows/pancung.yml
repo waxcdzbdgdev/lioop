@@ -18,18 +18,30 @@ jobs:
     steps:
       - run: echo "hello world" & sleep 80
 
-  trigger-khucluke:
+  trigger-next:
     needs: run-hello
     runs-on: ubuntu-latest
     if: github.event.inputs.loop_count > 0
     steps:
-      - name: Panggil khucluke
+      - name: Tentukan tujuan (Khucluke atau Xharape)
+        id: pick
+        run: |
+          LOOP=${{ github.event.inputs.loop_count }}
+          if [ $(( LOOP % 2 )) -eq 0 ]; then
+            echo "target=khucluke" >> $GITHUB_OUTPUT
+          else
+            echo "target=xharape" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Panggil tujuan
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          new_loop=$(( ${{ github.event.inputs.loop_count }} - 1 ))
+          NEW_LOOP=$(( ${{ github.event.inputs.loop_count }} - 1 ))
+          TARGET="${{ steps.pick.outputs.target }}"
+          echo "🚀 Pancung → $TARGET (loop_count=$NEW_LOOP)"
           curl -X POST \
             -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${{ github.repository }}/actions/workflows/khucluke.yml/dispatches \
-            -d "{\"ref\":\"main\",\"inputs\":{\"loop_count\":\"$new_loop\"}}"
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/$TARGET.yml/dispatches \
+            -d "{\"ref\":\"main\",\"inputs\":{\"loop_count\":\"$NEW_LOOP\"}}"
