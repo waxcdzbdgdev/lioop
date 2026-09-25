@@ -16,7 +16,7 @@ jobs:
     name: ${{ matrix.name }}
     strategy:
       fail-fast: false
-      max-parallel: 10
+      max-parallel: 20
       matrix:
         include:
           - name: tasakahias-aesene12awe1O
