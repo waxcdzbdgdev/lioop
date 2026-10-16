@@ -42,6 +42,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 310
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.1
       - name: Jalankan dengan durasi dinamis
         run: |
           HOUR_UTC=$(date -u +%H)
@@ -79,6 +81,9 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.inputs.loop_count > 0
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.1
+
       - name: Panggil Pancung
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
