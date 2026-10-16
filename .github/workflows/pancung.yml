@@ -17,7 +17,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4.2.1
 
       - run: echo "hello world" & sleep 80
 
@@ -27,7 +27,7 @@ jobs:
     if: github.event.inputs.loop_count > 0
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4.2.1
 
       - name: Tentukan tujuan (Khucluke atau Xharape)
         id: pick
